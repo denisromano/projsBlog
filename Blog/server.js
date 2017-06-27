@@ -76,7 +76,8 @@ app.get('/api/artigo/*', function(req, res) {
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('*', function (req, res) {
-    res.status(404).send({ error: 'API Not found '});
+    //res.status(404).send({ error: 'API Not found '});
+    res.sendfile(path.join(__dirname, 'dist/index.html'));
 });
 
 app.listen(process.env.PORT || 3000, function(){
