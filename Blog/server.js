@@ -27,7 +27,7 @@ if (!fs.existsSync(dbFolder)){
 //se o arquivo nao existe, retorna JSON array vazio
 //se o arquivo existe, retorna JSON array com todos contatos
 var tryRead = function(path,callback) {
-    fs.readFile(path, 'utf8', function (err, contatos) {
+    fs.readFile(path, 'utf-8', function (err, contatos) {
         if (err) return callback([]);
         var contatosJSON = [];
         try{
@@ -54,14 +54,14 @@ app.post('/api/contato', function (req, res) {
         });
     });
 });
-/*
+
 app.get('/api/artigos', function(req, res) {
-    const artigosDbPath = dbFolder + '/artigos.json';
+    const artigosDbPath = 'C:/projsBlog/Blog/db/artigos.json';
     tryRead(artigosDbPath, function(artigos){
         res.status(200).json(artigos);
     })
-})*/
-app.get('/api/artigos/*', function(req, res) {
+})
+app.get('/api/artigo/*', function(req, res) {
     const artigosDbPath = dbFolder + '/artigos.json';
     tryRead(artigosDbPath, function(artigos){
 
@@ -80,5 +80,5 @@ app.get('*', function (req, res) {
 });
 
 app.listen(process.env.PORT || 3000, function(){
-    console.log('escutando na porta 3000');
+    console.log('escutando na porta 3000 xx');
 });

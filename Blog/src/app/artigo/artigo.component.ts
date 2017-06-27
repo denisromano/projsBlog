@@ -1,10 +1,10 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Artigo } from '../home/home.component';
 import * as jQuery from 'jquery';
 import 'rxjs/add/operator/map';
-import { DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-artigo',
@@ -26,19 +26,19 @@ export class ArtigoComponent implements OnInit {
           });
         });
     });
-}
-resultadoArtigo(artigo) {
-  console.log(artigo);
-  this.artigo = JSON.parse(artigo._body);
-  this.http.get("assets/artigo" + this.artigo.id + ".html")
-    .subscribe(file => {
-      this.zone.run(() => {
-        this.resultadoHtmlArtigo(file);
-        jQuery.getScript('assets/artigo' + this.artigo.id + '.js');
+  }
+  resultadoArtigo(artigo) {
+    console.log(artigo);
+    this.artigo = JSON.parse(artigo._body);
+    this.http.get("assets/artigo" + this.artigo.id + ".html")
+      .subscribe(file => {
+        this.zone.run(() => {
+          this.resultadoHtmlArtigo(file);
+          jQuery.getScript('assets/artigo' + this.artigo.id + '.js');
+        });
       });
-    });
-  }  
-resultadoHtmlArtigo(file) {
-  this.html = this.sanitizer.bypassSecurityTrustHtml(file._body);
-}
+  }
+  resultadoHtmlArtigo(file) {
+    this.html = this.sanitizer.bypassSecurityTrustHtml(file._body);
+  }
 }
